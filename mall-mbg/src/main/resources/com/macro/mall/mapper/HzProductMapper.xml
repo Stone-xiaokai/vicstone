@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.HzProductMapper" >
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.HzProduct" >
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_brand" property="productBrand" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+    <result column="product_big_category_id" property="productBigCategoryId" jdbcType="INTEGER" />
+    <result column="product_small_category_id" property="productSmallCategoryId" jdbcType="INTEGER" />
+    <result column="product_address" property="productAddress" jdbcType="VARCHAR" />
+    <result column="product_text" property="productText" jdbcType="VARCHAR" />
+    <result column="product_src_one" property="productSrcOne" jdbcType="VARCHAR" />
+    <result column="product_src_two" property="productSrcTwo" jdbcType="VARCHAR" />
+    <result column="product_src_three" property="productSrcThree" jdbcType="VARCHAR" />
+    <result column="product_status" property="productStatus" jdbcType="VARCHAR" />
+    <result column="product_user_id" property="productUserId" jdbcType="INTEGER" />
+    <result column="product_recommend" property="productRecommend" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_id, product_name, product_brand, product_price, product_big_category_id, 
+    product_small_category_id, product_address, product_text, product_src_one, product_src_two, 
+    product_src_three, product_status, product_user_id, product_recommend
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hz_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByIsUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from hz_product
+    where product_user_id = #{productUserId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByIsNotUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from hz_product
+    where product_user_id != #{productUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hz_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.HzProduct" >
+    insert into hz_product (product_id, product_name, product_brand, 
+      product_price, product_big_category_id, product_small_category_id, 
+      product_address, product_text, product_src_one, 
+      product_src_two, product_src_three, product_status, 
+      product_user_id, product_recommend)
+    values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, 
+      #{productPrice,jdbcType=DECIMAL}, #{productBigCategoryId,jdbcType=INTEGER}, #{productSmallCategoryId,jdbcType=INTEGER}, 
+      #{productAddress,jdbcType=VARCHAR}, #{productText,jdbcType=VARCHAR}, #{productSrcOne,jdbcType=VARCHAR}, 
+      #{productSrcTwo,jdbcType=VARCHAR}, #{productSrcThree,jdbcType=VARCHAR}, #{productStatus,jdbcType=VARCHAR}, 
+      #{productUserId,jdbcType=INTEGER}, #{productRecommend,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.HzProduct" >
+    insert into hz_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productBrand != null" >
+        product_brand,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="productBigCategoryId != null" >
+        product_big_category_id,
+      </if>
+      <if test="productSmallCategoryId != null" >
+        product_small_category_id,
+      </if>
+      <if test="productAddress != null" >
+        product_address,
+      </if>
+      <if test="productText != null" >
+        product_text,
+      </if>
+      <if test="productSrcOne != null" >
+        product_src_one,
+      </if>
+      <if test="productSrcTwo != null" >
+        product_src_two,
+      </if>
+      <if test="productSrcThree != null" >
+        product_src_three,
+      </if>
+      <if test="productStatus != null" >
+        product_status,
+      </if>
+      <if test="productUserId != null" >
+        product_user_id,
+      </if>
+      <if test="productRecommend != null" >
+        product_recommend,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productBrand != null" >
+        #{productBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productBigCategoryId != null" >
+        #{productBigCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productSmallCategoryId != null" >
+        #{productSmallCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productAddress != null" >
+        #{productAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productText != null" >
+        #{productText,jdbcType=VARCHAR},
+      </if>
+      <if test="productSrcOne != null" >
+        #{productSrcOne,jdbcType=VARCHAR},
+      </if>
+      <if test="productSrcTwo != null" >
+        #{productSrcTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="productSrcThree != null" >
+        #{productSrcThree,jdbcType=VARCHAR},
+      </if>
+      <if test="productStatus != null" >
+        #{productStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="productUserId != null" >
+        #{productUserId,jdbcType=INTEGER},
+      </if>
+      <if test="productRecommend != null" >
+        #{productRecommend,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.HzProduct" >
+    update hz_product
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productBrand != null" >
+        product_brand = #{productBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productBigCategoryId != null" >
+        product_big_category_id = #{productBigCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productSmallCategoryId != null" >
+        product_small_category_id = #{productSmallCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productAddress != null" >
+        product_address = #{productAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productText != null" >
+        product_text = #{productText,jdbcType=VARCHAR},
+      </if>
+      <if test="productSrcOne != null" >
+        product_src_one = #{productSrcOne,jdbcType=VARCHAR},
+      </if>
+      <if test="productSrcTwo != null" >
+        product_src_two = #{productSrcTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="productSrcThree != null" >
+        product_src_three = #{productSrcThree,jdbcType=VARCHAR},
+      </if>
+      <if test="productStatus != null" >
+        product_status = #{productStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="productUserId != null" >
+        product_user_id = #{productUserId,jdbcType=INTEGER},
+      </if>
+      <if test="productRecommend != null" >
+        product_recommend = #{productRecommend,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.HzProduct" >
+    update hz_product
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_brand = #{productBrand,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      product_big_category_id = #{productBigCategoryId,jdbcType=INTEGER},
+      product_small_category_id = #{productSmallCategoryId,jdbcType=INTEGER},
+      product_address = #{productAddress,jdbcType=VARCHAR},
+      product_text = #{productText,jdbcType=VARCHAR},
+      product_src_one = #{productSrcOne,jdbcType=VARCHAR},
+      product_src_two = #{productSrcTwo,jdbcType=VARCHAR},
+      product_src_three = #{productSrcThree,jdbcType=VARCHAR},
+      product_status = #{productStatus,jdbcType=VARCHAR},
+      product_user_id = #{productUserId,jdbcType=INTEGER},
+      product_recommend = #{productRecommend,jdbcType=VARCHAR}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+</mapper>
