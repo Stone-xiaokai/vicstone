@@ -20,4 +20,6 @@ public interface HzProductMapper {
     List<HzProduct> selectByIsUser(Integer productUserId);
 
     List<HzProduct> selectByIsNotUser(Integer productUserId);
+
+    List<HzProduct> selectBySmallLei(Integer productSmallCategoryId);
 }

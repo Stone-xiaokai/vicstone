@@ -278,6 +278,16 @@ public class PmsProductServiceImpl implements PmsProductService {
         return list;
     }
 
+    @Override
+    public HzProduct selectProductDetail(Integer productId) {
+        return hzProductMapper.selectByPrimaryKey(productId);
+    }
+
+    @Override
+    public List<HzProduct> selectProductBySmallLei(Integer productSmallCategoryId) {
+        return hzProductMapper.selectBySmallLei(productSmallCategoryId);
+    }
+
     /**
      * @deprecated 旧版创建
      */

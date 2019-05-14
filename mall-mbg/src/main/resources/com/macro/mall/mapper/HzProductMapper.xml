@@ -34,6 +34,12 @@
     from hz_product
     where product_user_id = #{productUserId,jdbcType=INTEGER}
   </select>
+    <select id="selectBySmallLei" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from hz_product
+        where product_small_category_id = #{productSmallCategoryId,jdbcType=INTEGER}
+    </select>
   <select id="selectByIsNotUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />

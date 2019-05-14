@@ -109,7 +109,20 @@ public class PmsProductController {
         List<HzProduct> list = productService.selectProductList(productUserId,isOrIsNot);
         return new CommonResult().success(list);
     }
-
+    @ApiOperation("根据商品小类查询商品列表")
+    @RequestMapping(value = "/select/productBySmallLei/{productSmallCategoryId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductBySmallLei(@PathVariable("productSmallCategoryId") Integer productSmallCategoryId) {
+        List<HzProduct> list = productService.selectProductBySmallLei(productSmallCategoryId);
+        return new CommonResult().success(list);
+    }
+    @ApiOperation("根据商品id查询商品详情")
+    @RequestMapping(value = "/select/productDetail/{productId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductDetail(@PathVariable("productId") Integer productUserId) {
+        HzProduct hzProduct = productService.selectProductDetail(productUserId);
+        return new CommonResult().success(hzProduct);
+    }
     @ApiOperation("批量上下架")
     @RequestMapping(value = "/update/publishStatus", method = RequestMethod.POST)
     @ResponseBody

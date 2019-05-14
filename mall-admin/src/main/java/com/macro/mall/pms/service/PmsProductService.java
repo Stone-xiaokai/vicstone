@@ -78,4 +78,8 @@ public interface PmsProductService {
     int saveProduct(HzProduct hzProduct);
 
     List<HzProduct> selectProductList(Integer productUserId,Integer selectParam);
+
+    HzProduct selectProductDetail(Integer productId);
+
+    List<HzProduct> selectProductBySmallLei(Integer productSmallCategoryId);
 }

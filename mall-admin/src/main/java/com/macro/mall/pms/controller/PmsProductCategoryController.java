@@ -68,10 +68,11 @@ public class PmsProductCategoryController {
         return new CommonResult().pageSuccess(productCategoryList);
     }
 
+
     @ApiOperation("根据id获取商品分类")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:productCategory:read')")
+//    @PreAuthorize("hasAuthority('pms:productCategory:read')")
     public Object getItem(@PathVariable Long id) {
         PmsProductCategory productCategory = productCategoryService.getItem(id);
         return new CommonResult().success(productCategory);
