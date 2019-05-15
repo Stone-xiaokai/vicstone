@@ -34,6 +34,12 @@
     from hz_product
     where product_user_id = #{productUserId,jdbcType=INTEGER}
   </select>
+  <select id="selectByMoHu" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from hz_product
+    where product_name LIKE "%"#{productName,jdbcType=VARCHAR}"%"
+  </select>
     <select id="selectBySmallLei" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />

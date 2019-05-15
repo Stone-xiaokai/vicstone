@@ -116,6 +116,13 @@ public class PmsProductController {
         List<HzProduct> list = productService.selectProductBySmallLei(productSmallCategoryId);
         return new CommonResult().success(list);
     }
+    @ApiOperation("根据商品name模糊查询商品列表")
+    @RequestMapping(value = "/select/selectByMoHu/{productName}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectByMoHu(@PathVariable("productName") String productName) {
+        List<HzProduct> list = productService.selectByMoHu(productName);
+        return new CommonResult().success(list);
+    }
     @ApiOperation("根据商品id查询商品详情")
     @RequestMapping(value = "/select/productDetail/{productId}", method = RequestMethod.GET)
     @ResponseBody

@@ -288,6 +288,11 @@ public class PmsProductServiceImpl implements PmsProductService {
         return hzProductMapper.selectBySmallLei(productSmallCategoryId);
     }
 
+    @Override
+    public List<HzProduct> selectByMoHu(String productName) {
+        return hzProductMapper.selectByMoHu(productName);
+    }
+
     /**
      * @deprecated 旧版创建
      */

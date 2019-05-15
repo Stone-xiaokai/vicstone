@@ -1,14 +1,9 @@
 package com.macro.mall.oms.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.macro.mall.mapper.OmsOrderDao;
-import com.macro.mall.mapper.OmsOrderOperateHistoryDao;
+import com.macro.mall.mapper.*;
 import com.macro.mall.dto.*;
-import com.macro.mall.mapper.OmsOrderMapper;
-import com.macro.mall.mapper.OmsOrderOperateHistoryMapper;
-import com.macro.mall.model.OmsOrder;
-import com.macro.mall.model.OmsOrderExample;
-import com.macro.mall.model.OmsOrderOperateHistory;
+import com.macro.mall.model.*;
 import com.macro.mall.oms.service.OmsOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +26,10 @@ public class OmsOrderServiceImpl implements OmsOrderService {
     private OmsOrderOperateHistoryDao orderOperateHistoryDao;
     @Autowired
     private OmsOrderOperateHistoryMapper orderOperateHistoryMapper;
+    @Autowired
+    private HzOrderMapper hzOrderMapper;
+    @Autowired
+    private HzCollectMapper hzCollectMapper;
 
     @Override
     public List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
@@ -154,5 +153,31 @@ public class OmsOrderServiceImpl implements OmsOrderService {
     @Override
     public List<OmsOrder> listALl() {
         return orderDao.getListALl();
+    }
+
+    @Override
+    public int inserOrder(HzOrder hzOrder) {
+        return hzOrderMapper.insert(hzOrder);
+    }
+
+    @Override
+    public List<OrderProductResult> getOrderDetailList(Integer userId) {
+
+        return hzOrderMapper.selectProductByUserId(userId);
+    }
+
+    @Override
+    public int insertCollect(HzCollect hzCollect) {
+        return hzCollectMapper.insert(hzCollect);
+    }
+
+    @Override
+    public List<CollectProductResult> getCollectDetailList(Integer userId) {
+        return hzCollectMapper.selectProductByUserId(userId);
+    }
+
+    @Override
+    public int deleteCollect(Integer collectProductId, Integer collectUserId) {
+        return hzCollectMapper.deleteByProductIdAndUserId(collectProductId,collectUserId);
     }
 }

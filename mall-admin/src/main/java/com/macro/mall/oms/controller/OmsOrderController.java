@@ -1,6 +1,8 @@
 package com.macro.mall.oms.controller;
 
 import com.macro.mall.dto.*;
+import com.macro.mall.model.HzCollect;
+import com.macro.mall.model.HzOrder;
 import com.macro.mall.model.OmsOrder;
 import com.macro.mall.oms.service.OmsOrderService;
 import io.swagger.annotations.Api;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +25,54 @@ public class OmsOrderController {
     @Autowired
     private OmsOrderService orderService;
 
+
+    @ApiOperation("新增订单")
+    @RequestMapping(value = "/insertOrder", method = RequestMethod.POST)
+    @ResponseBody
+    public Object insertOrder(@RequestBody HzOrder hzOrder) {
+        System.out.println(hzOrder.getProductId()+" : "+hzOrder.getUserId());
+        hzOrder.setCreateTime(new Date());
+        int orderList = orderService.inserOrder(hzOrder);
+        return new CommonResult().success(orderList);
+    }
+
+    @ApiOperation("新增收藏")
+    @RequestMapping(value = "/insertCollect", method = RequestMethod.POST)
+    @ResponseBody
+    public Object insertCollect(@RequestBody HzCollect hzCollect) {
+        hzCollect.setCollectCreateTime(new Date());
+        int collectList = orderService.insertCollect(hzCollect);
+        return new CommonResult().success(collectList);
+    }
+
+    @ApiOperation("根据用户id查询订单详情列表")
+    @RequestMapping(value = "/getOrderDetailList/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getOrderDetailList(@PathVariable Integer userId) {
+        List<OrderProductResult> orderList = orderService.getOrderDetailList(userId);
+        return new CommonResult().pageSuccess(orderList);
+    }
+    @ApiOperation("根据用户id查询收藏详情列表")
+    @RequestMapping(value = "/getCollectDetailList/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getCollectDetailList(@PathVariable Integer userId) {
+        List<CollectProductResult> orderList = orderService.getCollectDetailList(userId);
+        return new CommonResult().pageSuccess(orderList);
+    }
+
+    @ApiOperation(value = "根据商品id和用户id删除收藏")
+    @RequestMapping(value = "/deleteCollect", method = RequestMethod.POST)
+    @ResponseBody
+    public Object deleteCollect(@RequestBody HzCollect hzCollect) {
+        System.out.println("productID:"+hzCollect.getCollectProductId());
+        System.out.println("userID:"+hzCollect.getCollectUserId());
+        Integer umsMember1 = orderService.deleteCollect(hzCollect.getCollectProductId(),hzCollect.getCollectUserId());
+        if (umsMember1 !=0) {
+            return new CommonResult().success(umsMember1);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
     @ApiOperation("查询订单")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody

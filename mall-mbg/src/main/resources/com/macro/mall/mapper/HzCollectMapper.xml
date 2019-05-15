@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.HzCollectMapper" >
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.HzCollect" >
+    <id column="collect_id" property="collectId" jdbcType="INTEGER" />
+    <result column="collect_user_id" property="collectUserId" jdbcType="INTEGER" />
+    <result column="collect_product_id" property="collectProductId" jdbcType="INTEGER" />
+    <result column="collect_create_time" property="collectCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="BaseResultMapcAndp" type="com.macro.mall.dto.CollectProductResult" >
+    <id column="collect_id" property="collectId" jdbcType="INTEGER" />
+    <result column="collect_user_id" property="collectUserId" jdbcType="INTEGER" />
+    <result column="collect_product_id" property="collectProductId" jdbcType="INTEGER" />
+    <result column="collect_create_time" property="collectCreateTime" jdbcType="TIMESTAMP" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_brand" property="productBrand" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+    <result column="product_big_category_id" property="productBigCategoryId" jdbcType="INTEGER" />
+    <result column="product_small_category_id" property="productSmallCategoryId" jdbcType="INTEGER" />
+    <result column="product_address" property="productAddress" jdbcType="VARCHAR" />
+    <result column="product_text" property="productText" jdbcType="VARCHAR" />
+    <result column="product_src_one" property="productSrcOne" jdbcType="VARCHAR" />
+    <result column="product_src_two" property="productSrcTwo" jdbcType="VARCHAR" />
+    <result column="product_src_three" property="productSrcThree" jdbcType="VARCHAR" />
+    <result column="product_status" property="productStatus" jdbcType="VARCHAR" />
+    <result column="product_user_id" property="productUserId" jdbcType="INTEGER" />
+    <result column="product_recommend" property="productRecommend" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    collect_id, collect_user_id, collect_product_id, collect_create_time
+  </sql>
+  <sql id="Base_Column_List_cAndp" >
+    collect_id, collect_user_id, collect_product_id, collect_create_time,product_id, product_name, product_brand, product_price, product_big_category_id,
+    product_small_category_id, product_address, product_text, product_src_one, product_src_two,
+    product_src_three, product_status, product_user_id, product_recommend
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hz_collect
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </select>
+  <select id="selectProductByUserId" resultMap="BaseResultMapcAndp" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List_cAndp" />
+    from hz_collect c,hz_product p where c.collect_product_id = p.product_id and c.collect_user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hz_collect
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByProductIdAndUserId" parameterType="java.lang.Integer" >
+    delete from hz_collect
+    where collect_product_id = #{collectProductId,jdbcType=INTEGER} and collect_user_id = #{collectUserId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.macro.mall.model.HzCollect" >
+    insert into hz_collect (collect_id, collect_user_id, collect_product_id, 
+      collect_create_time)
+    values (#{collectId,jdbcType=INTEGER}, #{collectUserId,jdbcType=INTEGER}, #{collectProductId,jdbcType=INTEGER}, 
+      #{collectCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.HzCollect" >
+    insert into hz_collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        collect_id,
+      </if>
+      <if test="collectUserId != null" >
+        collect_user_id,
+      </if>
+      <if test="collectProductId != null" >
+        collect_product_id,
+      </if>
+      <if test="collectCreateTime != null" >
+        collect_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        #{collectId,jdbcType=INTEGER},
+      </if>
+      <if test="collectUserId != null" >
+        #{collectUserId,jdbcType=INTEGER},
+      </if>
+      <if test="collectProductId != null" >
+        #{collectProductId,jdbcType=INTEGER},
+      </if>
+      <if test="collectCreateTime != null" >
+        #{collectCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.HzCollect" >
+    update hz_collect
+    <set >
+      <if test="collectUserId != null" >
+        collect_user_id = #{collectUserId,jdbcType=INTEGER},
+      </if>
+      <if test="collectProductId != null" >
+        collect_product_id = #{collectProductId,jdbcType=INTEGER},
+      </if>
+      <if test="collectCreateTime != null" >
+        collect_create_time = #{collectCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.HzCollect" >
+    update hz_collect
+    set collect_user_id = #{collectUserId,jdbcType=INTEGER},
+      collect_product_id = #{collectProductId,jdbcType=INTEGER},
+      collect_create_time = #{collectCreateTime,jdbcType=TIMESTAMP}
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </update>
+</mapper>

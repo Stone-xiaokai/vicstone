@@ -1,7 +1,10 @@
 package com.macro.mall.oms.service;
 
 import com.macro.mall.dto.*;
+import com.macro.mall.model.HzCollect;
+import com.macro.mall.model.HzOrder;
 import com.macro.mall.model.OmsOrder;
+import io.swagger.models.auth.In;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -57,4 +60,14 @@ public interface OmsOrderService {
     int updateNote(Long id, String note, Integer status);
 
     List<OmsOrder> listALl();
+
+    int inserOrder(HzOrder hzOrder);
+
+    List<OrderProductResult> getOrderDetailList(Integer userId);
+
+    int insertCollect(HzCollect hzCollect);
+
+    List<CollectProductResult> getCollectDetailList(Integer userId);
+
+    int deleteCollect(Integer collectProductId,Integer collectUserId);
 }
