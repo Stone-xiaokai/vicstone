@@ -116,6 +116,13 @@ public class PmsProductController {
         List<HzProduct> list = productService.selectProductBySmallLei(productSmallCategoryId);
         return new CommonResult().success(list);
     }
+    @ApiOperation("根据商品小类查询商品列表")
+    @RequestMapping(value = "/select/productBySmallLeiUser/{productSmallCategoryId}/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductBySmallLeiUser(@PathVariable("productSmallCategoryId") Integer productSmallCategoryId,@PathVariable("userId") Integer userId) {
+        List<HzProduct> list = productService.selectProductBySmallLeiUser(productSmallCategoryId,userId);
+        return new CommonResult().success(list);
+    }
     @ApiOperation("根据商品name模糊查询商品列表")
     @RequestMapping(value = "/select/selectByMoHu/{productName}", method = RequestMethod.GET)
     @ResponseBody
@@ -123,6 +130,22 @@ public class PmsProductController {
         List<HzProduct> list = productService.selectByMoHu(productName);
         return new CommonResult().success(list);
     }
+    @ApiOperation("根据商品name模糊查询商品列表")
+    @RequestMapping(value = "/select/selectByMoHuUser/{productName}/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectByMoHuUser(@PathVariable("productName") String productName,@PathVariable("userId") Integer userId) {
+        List<HzProduct> list = productService.selectByMoHuUser(productName,userId);
+        return new CommonResult().success(list);
+    }
+
+    @ApiOperation("根据物品id删除物品")
+    @RequestMapping(value = "/delete/{productId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object deleteProduct(@PathVariable("productId") Integer productId) {
+        int count = productService.deleteProduct(productId);
+        return new CommonResult().success(count);
+    }
+
     @ApiOperation("根据商品id查询商品详情")
     @RequestMapping(value = "/select/productDetail/{productId}", method = RequestMethod.GET)
     @ResponseBody

@@ -13,6 +13,7 @@
     <result column="collect_product_id" property="collectProductId" jdbcType="INTEGER" />
     <result column="collect_create_time" property="collectCreateTime" jdbcType="TIMESTAMP" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
     <result column="product_brand" property="productBrand" jdbcType="VARCHAR" />
     <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
     <result column="product_big_category_id" property="productBigCategoryId" jdbcType="INTEGER" />

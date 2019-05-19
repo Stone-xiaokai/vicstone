@@ -32,25 +32,37 @@
     select
     <include refid="Base_Column_List" />
     from hz_product
-    where product_user_id = #{productUserId,jdbcType=INTEGER}
+    where product_user_id = #{productUserId,jdbcType=INTEGER} and product_status = 1
   </select>
   <select id="selectByMoHu" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from hz_product
-    where product_name LIKE "%"#{productName,jdbcType=VARCHAR}"%"
+    where product_name LIKE "%"#{productName,jdbcType=VARCHAR}"%" and product_status = 1
+  </select>
+  <select id="selectByMoHuUser" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from hz_product
+    where product_name LIKE "%"#{productName,jdbcType=VARCHAR}"%" and product_user_id != #{userId} and product_status = 1
   </select>
     <select id="selectBySmallLei" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
         from hz_product
-        where product_small_category_id = #{productSmallCategoryId,jdbcType=INTEGER}
+        where product_small_category_id = #{productSmallCategoryId,jdbcType=INTEGER} and product_status = 1
     </select>
+  <select id="selectBySmallLeiUser" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from hz_product
+    where product_small_category_id = #{productSmallCategoryId,jdbcType=INTEGER} and product_user_id != #{userId,jdbcType=INTEGER} and product_status = 1
+  </select>
   <select id="selectByIsNotUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from hz_product
-    where product_user_id != #{productUserId,jdbcType=INTEGER}
+    where product_user_id != #{productUserId,jdbcType=INTEGER} and product_status = 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from hz_product

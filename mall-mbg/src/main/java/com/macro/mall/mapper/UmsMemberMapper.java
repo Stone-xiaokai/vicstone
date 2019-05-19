@@ -31,5 +31,7 @@ public interface UmsMemberMapper {
 
     UmsMember queryByOpenId(String openId);
 
+    int updateAddressById(@Param("city") String city,@Param("id") Long id);
+
     UmsMember selectByNameAndPassWord(@Param("username") String username,@Param("password") String password);
 }

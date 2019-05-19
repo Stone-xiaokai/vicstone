@@ -120,11 +120,30 @@ public class UmsMemberController {
     @RequestMapping(value = "/insertUser", method = RequestMethod.POST)
     @ResponseBody
     public Object insertUser(@RequestBody UmsMember umsMember) {
-        int count = umsMemberService.insertUser(umsMember);
-        if (count ==1) {
-            return new CommonResult().success(count);
-        } else {
+        int count =0;
+        try{
+             count = umsMemberService.insertUser(umsMember);
+        }catch (Exception e){
             return new CommonResult().failed();
         }
+            return new CommonResult().success(count);
+
+    }
+
+    @ApiOperation(value = "根据用户id修改地址")
+    @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateAddress(@RequestBody UmsMember umsMember) {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaa");
+        System.out.println(umsMember.getCity());
+        System.out.println(umsMember.getId());
+        int count =0;
+        try{
+            count = umsMemberService.updateAddressById(umsMember.getCity(),umsMember.getId());
+        }catch (Exception e){
+            return new CommonResult().failed();
+        }
+        return new CommonResult().success(count);
+
     }
 }

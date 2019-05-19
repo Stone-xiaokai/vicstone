@@ -84,5 +84,10 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         return memberMapper.insertSelective(umsMember);
     }
 
+    @Override
+    public int updateAddressById(String city, Long userId) {
+        return memberMapper.updateAddressById(city,userId);
+    }
+
 
 }

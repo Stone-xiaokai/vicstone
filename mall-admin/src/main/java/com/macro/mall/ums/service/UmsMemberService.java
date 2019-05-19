@@ -28,4 +28,6 @@ public interface UmsMemberService {
     UmsMember selectByNameAndPassWord(String username,String password);
 
     int insertUser(UmsMember umsMember);
+
+    int updateAddressById(String city,Long userId);
 }

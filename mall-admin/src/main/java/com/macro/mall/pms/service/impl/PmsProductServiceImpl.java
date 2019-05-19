@@ -289,8 +289,23 @@ public class PmsProductServiceImpl implements PmsProductService {
     }
 
     @Override
+    public List<HzProduct> selectProductBySmallLeiUser(Integer productSmallCategoryId, Integer userId) {
+        return hzProductMapper.selectBySmallLeiUser(productSmallCategoryId,userId);
+    }
+
+    @Override
     public List<HzProduct> selectByMoHu(String productName) {
         return hzProductMapper.selectByMoHu(productName);
+    }
+
+    @Override
+    public List<HzProduct> selectByMoHuUser(String productName, Integer userId) {
+        return hzProductMapper.selectByMoHuUser(productName,userId);
+    }
+
+    @Override
+    public int deleteProduct(Integer productId) {
+        return hzProductMapper.deleteByPrimaryKey(productId);
     }
 
     /**
