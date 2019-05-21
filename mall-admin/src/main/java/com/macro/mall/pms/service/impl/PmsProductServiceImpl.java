@@ -7,6 +7,7 @@ import com.macro.mall.dto.PmsProductQueryParam;
 import com.macro.mall.dto.PmsProductResult;
 import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
+import com.macro.mall.model.request.HzProductRequest;
 import com.macro.mall.pms.service.PmsProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -307,6 +308,14 @@ public class PmsProductServiceImpl implements PmsProductService {
     public int deleteProduct(Integer productId) {
         return hzProductMapper.deleteByPrimaryKey(productId);
     }
+
+    @Override
+    public List<HzProduct> selectByExample(HzProductRequest hzProductRequest) {
+        PageHelper.startPage(hzProductRequest.getPageNum(), hzProductRequest.getPageSize());
+        return hzProductMapper.selectByExample(hzProductRequest);
+    }
+
+
 
     /**
      * @deprecated 旧版创建

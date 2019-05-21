@@ -1,6 +1,7 @@
 package com.macro.mall.mapper;
 
 import com.macro.mall.model.HzProduct;
+import com.macro.mall.model.request.HzProductRequest;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,5 +30,7 @@ public interface HzProductMapper {
     List<HzProduct> selectByMoHu(String productName);
 
     List<HzProduct> selectByMoHuUser(@Param("productName")String productName,@Param("userId")Integer userId);
+
+    List<HzProduct> selectByExample(HzProductRequest hzProductRequest);
 
 }

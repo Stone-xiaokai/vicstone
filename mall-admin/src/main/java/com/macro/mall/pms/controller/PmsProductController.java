@@ -3,6 +3,7 @@ package com.macro.mall.pms.controller;
 import com.macro.mall.dto.*;
 import com.macro.mall.model.HzProduct;
 import com.macro.mall.model.PmsProduct;
+import com.macro.mall.model.request.HzProductRequest;
 import com.macro.mall.pms.service.PmsProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -68,6 +69,14 @@ public class PmsProductController {
                           @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProduct> productList = productService.list(productQueryParam, pageSize, pageNum);
+        return new CommonResult().pageSuccess(productList);
+    }
+    @ApiOperation("查询商品")
+    @RequestMapping(value = "/selectByExample", method = RequestMethod.POST)
+    @ResponseBody
+//    @PreAuthorize("hasAuthority('pms:product:read')")
+    public Object selectByExample(@RequestBody HzProductRequest hzProductRequest) {
+        List<HzProduct> productList = productService.selectByExample(hzProductRequest);
         return new CommonResult().pageSuccess(productList);
     }
 

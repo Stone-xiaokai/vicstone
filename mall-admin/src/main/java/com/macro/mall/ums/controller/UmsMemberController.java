@@ -44,7 +44,7 @@ public class UmsMemberController {
     @ApiOperation(value = "更新会员")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:member:update')")
+//    @PreAuthorize("hasAuthority('pms:member:update')")
     public Object update(@PathVariable("id") Long id,
                          @Validated @RequestBody UmsMember pmsBrandParam,
                          BindingResult result) {
@@ -134,9 +134,6 @@ public class UmsMemberController {
     @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
     @ResponseBody
     public Object updateAddress(@RequestBody UmsMember umsMember) {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaa");
-        System.out.println(umsMember.getCity());
-        System.out.println(umsMember.getId());
         int count =0;
         try{
             count = umsMemberService.updateAddressById(umsMember.getCity(),umsMember.getId());

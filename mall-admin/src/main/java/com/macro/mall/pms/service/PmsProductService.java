@@ -6,6 +6,7 @@ import com.macro.mall.dto.PmsProductQueryParam;
 import com.macro.mall.dto.PmsProductResult;
 import com.macro.mall.model.HzProduct;
 import com.macro.mall.model.PmsProduct;
+import com.macro.mall.model.request.HzProductRequest;
 import io.swagger.models.auth.In;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -90,4 +91,6 @@ public interface PmsProductService {
     List<HzProduct> selectByMoHuUser(String productName,Integer userId);
 
     int deleteProduct(Integer productId);
+
+    List<HzProduct> selectByExample(HzProductRequest hzProductRequest);
 }
