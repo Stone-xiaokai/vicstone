@@ -315,6 +315,10 @@ public class PmsProductServiceImpl implements PmsProductService {
         return hzProductMapper.selectByExample(hzProductRequest);
     }
 
+    @Override
+    public int updateProductStatus(Integer productId, Integer productStatus) {
+        return hzProductMapper.updateProductStatus(productId,productStatus);
+    }
 
 
     /**

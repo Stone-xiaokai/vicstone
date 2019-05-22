@@ -93,4 +93,6 @@ public interface PmsProductService {
     int deleteProduct(Integer productId);
 
     List<HzProduct> selectByExample(HzProductRequest hzProductRequest);
+
+    int updateProductStatus(Integer productId,Integer productStatus);
 }

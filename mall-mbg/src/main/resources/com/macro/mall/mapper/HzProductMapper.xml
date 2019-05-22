@@ -16,11 +16,17 @@
     <result column="product_status" property="productStatus" jdbcType="VARCHAR" />
     <result column="product_user_id" property="productUserId" jdbcType="INTEGER" />
     <result column="product_recommend" property="productRecommend" jdbcType="VARCHAR" />
+    <result column="username" property="userName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     product_id, product_name, product_brand, product_price, product_big_category_id, 
     product_small_category_id, product_address, product_text, product_src_one, product_src_two, 
     product_src_three, product_status, product_user_id, product_recommend
+  </sql>
+  <sql id="Base_Column_List_user" >
+    product_id, product_name, product_brand, product_price, product_big_category_id,
+    product_small_category_id, product_address, product_text, product_src_one, product_src_two,
+    product_src_three, product_status, product_user_id, product_recommend,username
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -235,26 +241,33 @@
   </update>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.macro.mall.model.request.HzProductRequest" >
     select
-    <include refid="Base_Column_List" />
-    from hz_product
+    <include refid="Base_Column_List_user" />
+    from hz_product p,ums_member u
     <where>
-
+      p.product_user_id = u.id
       <if test="productName != null">
-        AND product_name = #{productName}
+        AND p.product_name = #{productName}
       </if>
       <if test="productBrand != null">
-        AND product_brand = #{productBrand}
+        AND p.product_brand = #{productBrand}
       </if>
       <if test="productSmallCategoryId != null">
-        AND product_small_category_id = #{productSmallCategoryId}
+        AND p.product_small_category_id = #{productSmallCategoryId}
       </if>
       <if test="productUserId != null">
-        AND product_user_id = #{productUserId}
+        AND p.product_user_id = #{productUserId}
       </if>
       <if test="productStatus != null">
-        AND product_status = #{productStatus}
+        AND p.product_status = #{productStatus}
       </if>
-
+      <if test="userName != null">
+        AND u.username = #{userName}
+      </if>
     </where>
   </select>
+  <update id="updateProductStatus">
+    update hz_product
+    set product_status = #{productStatus,jdbcType=INTEGER}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
 </mapper>

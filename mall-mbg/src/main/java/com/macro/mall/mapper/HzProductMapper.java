@@ -33,4 +33,6 @@ public interface HzProductMapper {
 
     List<HzProduct> selectByExample(HzProductRequest hzProductRequest);
 
+    int updateProductStatus(@Param("productId") Integer id,@Param("productStatus") Integer productStatus);
+
 }

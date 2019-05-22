@@ -29,6 +29,8 @@ public class HzProduct {
 
     private String productRecommend;
 
+    private String userName;
+
     public Integer getProductId() {
         return productId;
     }
@@ -139,5 +141,13 @@ public class HzProduct {
 
     public void setProductRecommend(String productRecommend) {
         this.productRecommend = productRecommend == null ? null : productRecommend.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

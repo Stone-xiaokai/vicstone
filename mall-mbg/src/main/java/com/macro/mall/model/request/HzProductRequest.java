@@ -16,6 +16,8 @@ public class HzProductRequest {
 
     private Integer pageSize;
 
+    private String userName;
+
     public String getProductName() {
         return productName;
     }
@@ -70,5 +72,13 @@ public class HzProductRequest {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -176,6 +176,19 @@ public class PmsProductController {
         }
     }
 
+    @ApiOperation("商品上下架")
+    @RequestMapping(value = "/update/productStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateProductStatus(@RequestParam("productId") Integer productId,
+                                      @RequestParam("productStatus") Integer productStatus) {
+        int count = productService.updateProductStatus(productId, productStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
+
     @ApiOperation("批量推荐商品")
     @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
     @ResponseBody
