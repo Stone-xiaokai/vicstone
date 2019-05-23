@@ -25,6 +25,8 @@ public interface HzProductMapper {
 
     List<HzProduct> selectBySmallLei(Integer productSmallCategoryId);
 
+    List<HzProduct> selectByBigLei(Integer productBigCategoryId);
+
     List<HzProduct> selectBySmallLeiUser(@Param("productSmallCategoryId") Integer productSmallCategoryId,@Param("userId") Integer userId);
 
     List<HzProduct> selectByMoHu(String productName);
@@ -34,5 +36,7 @@ public interface HzProductMapper {
     List<HzProduct> selectByExample(HzProductRequest hzProductRequest);
 
     int updateProductStatus(@Param("productId") Integer id,@Param("productStatus") Integer productStatus);
+
+    int updateProductCate(@Param("productId") Integer id,@Param("productSmallCate") Integer productSmallCate);
 
 }

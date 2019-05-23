@@ -22,7 +22,7 @@ public interface PmsProductCategoryService {
 
     List<PmsProductCategory> getList(Long parentId, Integer pageSize, Integer pageNum);
 
-    int delete(Long id);
+    int delete(Integer id);
 
     PmsProductCategory getItem(Long id);
 

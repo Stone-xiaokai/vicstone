@@ -1,13 +1,9 @@
 package com.macro.mall.pms.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.macro.mall.mapper.PmsProductCategoryAttributeRelationDao;
-import com.macro.mall.mapper.PmsProductCategoryDao;
+import com.macro.mall.mapper.*;
 import com.macro.mall.dto.PmsProductCategoryParam;
 import com.macro.mall.dto.PmsProductCategoryWithChildrenItem;
-import com.macro.mall.mapper.PmsProductCategoryAttributeRelationMapper;
-import com.macro.mall.mapper.PmsProductCategoryMapper;
-import com.macro.mall.mapper.PmsProductMapper;
 import com.macro.mall.model.*;
 import com.macro.mall.pms.service.PmsProductCategoryService;
 import org.apache.commons.collections.CollectionUtils;
@@ -34,6 +30,9 @@ public class PmsProductCategoryServiceImpl implements PmsProductCategoryService 
     private PmsProductCategoryAttributeRelationMapper productCategoryAttributeRelationMapper;
     @Autowired
     private PmsProductCategoryDao productCategoryDao;
+
+    @Autowired
+    private HzProductMapper hzProductMapper;
 
     @Override
     public int create(PmsProductCategoryParam pmsProductCategoryParam) {
@@ -104,8 +103,18 @@ public class PmsProductCategoryServiceImpl implements PmsProductCategoryService 
     }
 
     @Override
-    public int delete(Long id) {
-        return productCategoryMapper.deleteByPrimaryKey(id);
+    public int delete(Integer id) {
+        List list = hzProductMapper.selectBySmallLei(id);
+        int count;
+        if(list.size()>0){
+            System.out.println("aaaa");
+            count = 0;
+        }else {
+            System.out.println("bbbb");
+            count = productCategoryMapper.deleteByPrimaryKey(id);
+        }
+        System.out.println(count);
+        return count;
     }
 
     @Override

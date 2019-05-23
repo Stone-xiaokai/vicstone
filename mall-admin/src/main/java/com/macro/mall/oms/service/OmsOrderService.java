@@ -65,6 +65,8 @@ public interface OmsOrderService {
 
     List<OrderProductResult> getOrderDetailList(Integer userId);
 
+    List<OrderProductListResult> getOrderList(OrderProductListResult orderProductListResult);
+
     int insertCollect(HzCollect hzCollect);
 
     List<CollectProductResult> getCollectDetailList(Integer userId);

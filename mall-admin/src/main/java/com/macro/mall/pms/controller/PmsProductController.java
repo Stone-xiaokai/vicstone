@@ -125,6 +125,13 @@ public class PmsProductController {
         List<HzProduct> list = productService.selectProductBySmallLei(productSmallCategoryId);
         return new CommonResult().success(list);
     }
+    @ApiOperation("根据商品大类查询商品列表")
+    @RequestMapping(value = "/select/productByBigLei/{productBigCategoryId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductByBigLei(@PathVariable("productBigCategoryId") Integer productBigCategoryId) {
+        List<HzProduct> list = productService.selectProductByBigLei(productBigCategoryId);
+        return new CommonResult().success(list);
+    }
     @ApiOperation("根据商品小类查询商品列表")
     @RequestMapping(value = "/select/productBySmallLeiUser/{productSmallCategoryId}/{userId}", method = RequestMethod.GET)
     @ResponseBody
@@ -132,6 +139,16 @@ public class PmsProductController {
         List<HzProduct> list = productService.selectProductBySmallLeiUser(productSmallCategoryId,userId);
         return new CommonResult().success(list);
     }
+    @ApiOperation("根据商品小类查询商品列表分页")
+    @RequestMapping(value = "/select/productBySmallLeiPage/{productSmallCategoryId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductBySmallLeiPage(@PathVariable("productSmallCategoryId") Integer productSmallCategoryId,
+                                              @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                              @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        List<HzProduct> list = productService.selectProductBySmallLeiPage(productSmallCategoryId,pageSize,pageNum);
+        return new CommonResult().pageSuccess(list);
+    }
+
     @ApiOperation("根据商品name模糊查询商品列表")
     @RequestMapping(value = "/select/selectByMoHu/{productName}", method = RequestMethod.GET)
     @ResponseBody
@@ -182,6 +199,19 @@ public class PmsProductController {
     public Object updateProductStatus(@RequestParam("productId") Integer productId,
                                       @RequestParam("productStatus") Integer productStatus) {
         int count = productService.updateProductStatus(productId, productStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
+
+    @ApiOperation("商品改变分类")
+    @RequestMapping(value = "/update/productCate", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateProductCate(@RequestParam("productId") Integer productId,
+                                      @RequestParam("productSmallCate") Integer productSmallCate) {
+        int count = productService.updateProductCate(productId, productSmallCate);
         if (count > 0) {
             return new CommonResult().success(count);
         } else {

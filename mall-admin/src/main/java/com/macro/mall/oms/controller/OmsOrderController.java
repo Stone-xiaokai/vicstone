@@ -52,6 +52,15 @@ public class OmsOrderController {
         List<OrderProductResult> orderList = orderService.getOrderDetailList(userId);
         return new CommonResult().pageSuccess(orderList);
     }
+
+    @ApiOperation("查询订单列表")
+    @RequestMapping(value = "/getOrderList", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getOrderList(@RequestBody OrderProductListResult orderProductListResult) {
+        List<OrderProductListResult> orderList = orderService.getOrderList(orderProductListResult);
+        return new CommonResult().pageSuccess(orderList);
+    }
+
     @ApiOperation("根据用户id查询收藏详情列表")
     @RequestMapping(value = "/getCollectDetailList/{userId}", method = RequestMethod.GET)
     @ResponseBody

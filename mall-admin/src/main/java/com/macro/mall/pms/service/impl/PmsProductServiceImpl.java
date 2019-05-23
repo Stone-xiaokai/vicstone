@@ -290,6 +290,20 @@ public class PmsProductServiceImpl implements PmsProductService {
     }
 
     @Override
+    public List<HzProduct> selectProductBySmallLeiPage(Integer productSmallCategoryId, Integer pageSize, Integer pageNum) {
+        System.out.println(pageNum);
+        System.out.println(pageSize);
+        PageHelper.startPage(pageNum, pageSize);
+        return hzProductMapper.selectBySmallLei(productSmallCategoryId);
+    }
+
+
+    @Override
+    public List<HzProduct> selectProductByBigLei(Integer productBigCategoryId) {
+        return hzProductMapper.selectByBigLei(productBigCategoryId);
+    }
+
+    @Override
     public List<HzProduct> selectProductBySmallLeiUser(Integer productSmallCategoryId, Integer userId) {
         return hzProductMapper.selectBySmallLeiUser(productSmallCategoryId,userId);
     }
@@ -318,6 +332,11 @@ public class PmsProductServiceImpl implements PmsProductService {
     @Override
     public int updateProductStatus(Integer productId, Integer productStatus) {
         return hzProductMapper.updateProductStatus(productId,productStatus);
+    }
+
+    @Override
+    public int updateProductCate(Integer productId, Integer productSmallCate) {
+        return hzProductMapper.updateProductCate(productId,productSmallCate);
     }
 
 

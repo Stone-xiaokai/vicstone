@@ -12,7 +12,7 @@ public interface PmsProductCategoryMapper {
 
     int deleteByExample(PmsProductCategoryExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(PmsProductCategory record);
 

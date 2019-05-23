@@ -58,6 +58,12 @@
         from hz_product
         where product_small_category_id = #{productSmallCategoryId,jdbcType=INTEGER} and product_status = 1
     </select>
+  <select id="selectByBigLei" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from hz_product
+    where product_big_category_id = #{productBigCategoryId,jdbcType=INTEGER} and product_status = 1
+  </select>
   <select id="selectBySmallLeiUser" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
@@ -268,6 +274,12 @@
   <update id="updateProductStatus">
     update hz_product
     set product_status = #{productStatus,jdbcType=INTEGER}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateProductCate">
+    update hz_product
+    set product_small_category_id = #{productSmallCate,jdbcType=INTEGER}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
 </mapper>

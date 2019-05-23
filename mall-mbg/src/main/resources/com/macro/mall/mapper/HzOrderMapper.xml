@@ -26,6 +26,29 @@
     <result column="product_user_id" property="productUserId" jdbcType="INTEGER" />
     <result column="product_recommend" property="productRecommend" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMapoAndpList" type="com.macro.mall.dto.OrderProductListResult" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <!--<result column="product_brand" property="productBrand" jdbcType="VARCHAR" />-->
+    <!--<result column="product_price" property="productPrice" jdbcType="DECIMAL" />-->
+    <!--<result column="product_big_category_id" property="productBigCategoryId" jdbcType="INTEGER" />-->
+    <!--<result column="product_small_category_id" property="productSmallCategoryId" jdbcType="INTEGER" />-->
+    <!--<result column="product_address" property="productAddress" jdbcType="VARCHAR" />-->
+    <!--<result column="product_text" property="productText" jdbcType="VARCHAR" />-->
+    <!--<result column="product_src_one" property="productSrcOne" jdbcType="VARCHAR" />-->
+    <!--<result column="product_src_two" property="productSrcTwo" jdbcType="VARCHAR" />-->
+    <!--<result column="product_src_three" property="productSrcThree" jdbcType="VARCHAR" />-->
+    <!--<result column="product_status" property="productStatus" jdbcType="VARCHAR" />-->
+    <result column="product_user_id" property="productUserId" jdbcType="INTEGER" />
+    <!--<result column="product_recommend" property="productRecommend" jdbcType="VARCHAR" />-->
+    <result column="username" property="buyUserName" jdbcType="VARCHAR" />
+    <result column="phone" property="buyPhone" jdbcType="VARCHAR" />
+    <result column="sellName" property="sellUserName" jdbcType="VARCHAR" />
+    <result column="sellPhone" property="sellPhone" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     order_id, user_id, order_product_id, create_time
   </sql>
@@ -33,6 +56,12 @@
     order_id, user_id, order_product_id, create_time,product_id, product_name, product_brand, product_price, product_big_category_id,
     product_small_category_id, product_address, product_text, product_src_one, product_src_two,
     product_src_three, product_status, product_user_id, product_recommend
+  </sql>
+
+  <sql id="Base_Column_List_oAndpList" >
+    order_id, user_id, order_product_id, create_time,product_id, product_name, product_brand, product_price, product_big_category_id,
+    product_small_category_id, product_address, product_text, product_src_one, product_src_two,
+    product_src_three, product_status, product_user_id, product_recommend,product_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -44,6 +73,24 @@
     select
     <include refid="Base_Column_List_oAndp" />
     from hz_order o,hz_product p where o.order_product_id = p.product_id and o.user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectOrderList" resultMap="BaseResultMapoAndpList" parameterType="com.macro.mall.dto.OrderProductListResult">
+select s.username as sellName,s.phone as sellPhone,tmp.*,tmp.username,tmp.product_id,tmp.product_name,tmp.product_user_id
+from (select o.*,u.username,p.product_id,p.product_name,p.product_user_id,u.phone from hz_order o,hz_product p,ums_member u where o.order_product_id = p.product_id and o.user_id = u.id)
+as tmp,ums_member s
+    <where>
+      tmp.product_user_id = s.id
+      <if test="orderId != null">
+        AND tmp.order_id = #{orderId}
+      </if>
+      <if test="buyUserName != null">
+        AND tmp.username = #{buyUserName}
+      </if>
+      <if test="sellUserName != null">
+        AND s.username = #{sellUserName}
+      </if>
+    </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from hz_order

@@ -1,6 +1,7 @@
 package com.macro.mall.ums.controller;
 
 import com.macro.mall.dto.CommonResult;
+import com.macro.mall.dto.ProductCateCount;
 import com.macro.mall.model.UmsMember;
 import com.macro.mall.ums.service.UmsMemberService;
 import io.swagger.annotations.Api;
@@ -142,5 +143,44 @@ public class UmsMemberController {
         }
         return new CommonResult().success(count);
 
+    }
+    @ApiOperation(value = "获取订单数量")
+    @RequestMapping(value = "/selectOrderCount", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectOrderCount() {
+        int count = umsMemberService.selectOrderCount();
+        return new CommonResult().success(count);
+    }
+
+    @ApiOperation(value = "获取物品数量")
+    @RequestMapping(value = "/selectProductCount", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductCount() {
+        int count = umsMemberService.selectProductCount();
+        return new CommonResult().success(count);
+    }
+
+    @ApiOperation(value = "按照物品状态获取物品数量")
+    @RequestMapping(value = "/selectProductCount/{productStatus}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductCount(@PathVariable("productStatus") String productStatus) {
+        int count = umsMemberService.selectProductCountByStatus(productStatus);
+        return new CommonResult().success(count);
+    }
+
+    @ApiOperation(value = "获取物品数量")
+    @RequestMapping(value = "/selectUserCount", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectUserCount() {
+        int count = umsMemberService.selectUserCount();
+        return new CommonResult().success(count);
+    }
+
+    @ApiOperation(value = "获取分类下物品数量")
+    @RequestMapping(value = "/selectProductCountCate", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProductCountCate() {
+        List<ProductCateCount> count = umsMemberService.selectProductCountCate();
+        return new CommonResult().success(count);
     }
 }

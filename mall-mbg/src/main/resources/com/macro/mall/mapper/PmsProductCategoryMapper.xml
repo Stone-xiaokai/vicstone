@@ -124,9 +124,9 @@
         from pms_product_category
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from pms_product_category
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{id}
     </delete>
     <delete id="deleteByExample" parameterType="com.macro.mall.model.PmsProductCategoryExample">
         delete from pms_product_category

@@ -167,6 +167,13 @@ public class OmsOrderServiceImpl implements OmsOrderService {
     }
 
     @Override
+    public List<OrderProductListResult> getOrderList(OrderProductListResult orderProductListResult) {
+        PageHelper.startPage(orderProductListResult.getPageNum(), orderProductListResult.getPageSize());
+        return hzOrderMapper.selectOrderList(orderProductListResult);
+    }
+
+
+    @Override
     public int insertCollect(HzCollect hzCollect) {
         return hzCollectMapper.insert(hzCollect);
     }

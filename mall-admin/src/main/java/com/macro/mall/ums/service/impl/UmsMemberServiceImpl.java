@@ -2,6 +2,8 @@ package com.macro.mall.ums.service.impl;
 
 import com.github.pagehelper.PageHelper;
 
+import com.macro.mall.dto.ProductCateCount;
+import com.macro.mall.mapper.HomeMapper;
 import com.macro.mall.mapper.UmsMemberMapper;
 
 import com.macro.mall.model.UmsMember;
@@ -26,7 +28,8 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     @Autowired
     private UmsMemberMapper memberMapper;
 
-
+    @Autowired
+    private HomeMapper homeMapper;
     @Override
     public List<UmsMember> listAllMember() {
         return memberMapper.selectByExample(new UmsMemberExample());
@@ -87,6 +90,31 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     @Override
     public int updateAddressById(String city, Long userId) {
         return memberMapper.updateAddressById(city,userId);
+    }
+
+    @Override
+    public int selectOrderCount() {
+        return homeMapper.selectOrderCount();
+    }
+
+    @Override
+    public int selectProductCount() {
+        return homeMapper.selectProductCount();
+    }
+
+    @Override
+    public int selectProductCountByStatus(String productStatus) {
+        return homeMapper.selectProductCountByStatus(productStatus);
+    }
+
+    @Override
+    public int selectUserCount() {
+        return homeMapper.selectUserCount();
+    }
+
+    @Override
+    public List<ProductCateCount> selectProductCountCate() {
+        return homeMapper.selectProductCateCount();
     }
 
 

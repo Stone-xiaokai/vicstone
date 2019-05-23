@@ -1,5 +1,6 @@
 package com.macro.mall.ums.service;
 
+import com.macro.mall.dto.ProductCateCount;
 import com.macro.mall.model.UmsMember;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,4 +31,14 @@ public interface UmsMemberService {
     int insertUser(UmsMember umsMember);
 
     int updateAddressById(String city,Long userId);
+
+    int selectOrderCount();
+
+    int selectProductCount();
+
+    int selectProductCountByStatus(String productStatus);
+
+    int selectUserCount();
+
+    List<ProductCateCount> selectProductCountCate();
 }

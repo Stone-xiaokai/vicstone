@@ -84,6 +84,10 @@ public interface PmsProductService {
 
     List<HzProduct> selectProductBySmallLei(Integer productSmallCategoryId);
 
+    List<HzProduct> selectProductBySmallLeiPage(Integer productSmallCategoryId,Integer pageSize, Integer pageNum);
+
+    List<HzProduct> selectProductByBigLei(Integer productBigCategoryId);
+
     List<HzProduct> selectProductBySmallLeiUser(Integer productSmallCategoryId,Integer userId);
 
     List<HzProduct> selectByMoHu(String productName);
@@ -95,4 +99,6 @@ public interface PmsProductService {
     List<HzProduct> selectByExample(HzProductRequest hzProductRequest);
 
     int updateProductStatus(Integer productId,Integer productStatus);
+
+    int updateProductCate(Integer productId,Integer productSmallCate);
 }
