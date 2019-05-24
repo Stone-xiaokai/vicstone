@@ -3,6 +3,7 @@ package com.macro.mall.ums.service.impl;
 import com.github.pagehelper.PageHelper;
 
 import com.macro.mall.dto.ProductCateCount;
+import com.macro.mall.dto.UserCityCount;
 import com.macro.mall.mapper.HomeMapper;
 import com.macro.mall.mapper.UmsMemberMapper;
 
@@ -115,6 +116,11 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     @Override
     public List<ProductCateCount> selectProductCountCate() {
         return homeMapper.selectProductCateCount();
+    }
+
+    @Override
+    public List<UserCityCount> selectUserCityCount() {
+        return homeMapper.selectUserCityCount();
     }
 
 

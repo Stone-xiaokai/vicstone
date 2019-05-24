@@ -2,6 +2,7 @@ package com.macro.mall.ums.controller;
 
 import com.macro.mall.dto.CommonResult;
 import com.macro.mall.dto.ProductCateCount;
+import com.macro.mall.dto.UserCityCount;
 import com.macro.mall.model.UmsMember;
 import com.macro.mall.ums.service.UmsMemberService;
 import io.swagger.annotations.Api;
@@ -181,6 +182,14 @@ public class UmsMemberController {
     @ResponseBody
     public Object selectProductCountCate() {
         List<ProductCateCount> count = umsMemberService.selectProductCountCate();
+        return new CommonResult().success(count);
+    }
+
+    @ApiOperation(value = "获取用户城市分布")
+    @RequestMapping(value = "/selectUserCityCount", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectUserCityCount() {
+        List<UserCityCount> count = umsMemberService.selectUserCityCount();
         return new CommonResult().success(count);
     }
 }

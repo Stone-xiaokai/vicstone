@@ -5,6 +5,12 @@
         <result column="value" property="value" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
     </resultMap>
+
+    <resultMap id="BaseResultMaps" type="com.macro.mall.dto.UserCityCount" >
+        <result column="value" property="values" jdbcType="INTEGER" />
+        <result column="city" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
     <select id="selectOrderCount" resultType="java.lang.Integer">
         select
         count(order_id)
@@ -29,5 +35,11 @@
         select
         count(p.product_id) as value,c.name as name
         from hz_product p,pms_product_category c where p.product_big_category_id = c.id group by product_big_category_id
+    </select>
+
+    <select id="selectUserCityCount" resultMap="BaseResultMaps">
+        select
+        count(id) as value,city
+        from ums_member group by city
     </select>
 </mapper>
