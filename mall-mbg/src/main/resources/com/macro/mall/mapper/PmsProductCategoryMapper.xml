@@ -336,7 +336,7 @@
             <if test="sort != null">
                 sort = #{sort,jdbcType=INTEGER},
             </if>
-            <if test="icon != null">
+            <if test="icon != 0">
                 icon = #{icon,jdbcType=VARCHAR},
             </if>
             <if test="keywords != null">
